@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+    <title>Andrews Hall Grand Orrery</title>
+    <meta charset="utf-8">
+
+    <!-- jQuery -->
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src="raphael.js" type="text/javascript" charset="utf-8"></script>
+    <script src="colorpicker.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	
+	window.onload = function () {
+		function loadColorPicker() {
+		$('#colorpicker').empty();
+			var winWidth=window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			var cp = Raphael.colorpicker(winWidth/2-150, $("#colorpicker").offset().top, 300, "#888", "colorpicker");
+			cp.onchange = function (clr) {
+				var color = cp.color()
+				var redHex = color.substring(1, 3);
+				var greenHex = color.substring(3, 5);
+				var blueHex = color.substring(5, 7);
+				var redDec = parseInt(redHex, 16);
+				var greenDec = parseInt(greenHex, 16);
+				var blueDec = parseInt(blueHex, 16);
+				var colorRgb = 'rgba(' + redDec + ', ' + greenDec + ', ' + blueDec + ', .8' + ')';
+				$('.well').css("background-color", colorRgb);
+				$('input#color').val(cp.color());
+			}
+			$('input#color').val(cp.color());
+		}
+
+		$(window).resize(function() {
+		loadColorPicker();
+		});
+
+		loadColorPicker();
+	};
+
+	</script>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+
+	<style>
+		dl {
+			margin: 20px 0;
+		}
+		dt {
+			font-size: 120%;
+		}
+		dd {
+			padding: 10px 20px 20px 20px;
+		}
+		dd:last-child {
+			border-bottom: none;
+		}
+		code {
+			color: black;
+			border: none;
+			background: rgba(128, 128, 128, .1);
+		}
+		pre {
+			background: #f8f8f8;
+			border: none;
+			color: #333;
+			padding: 20px;
+		}
+		.jumbotron h1 {
+			color:white;
+		}
+		h2 {
+			margin-top: 50px;
+		}
+		h3 {
+			margin-top: 0px;
+			color: #ffffff;
+		}
+		.jumbotron {
+			background-color: rgba(0, 0, 0, 0.4);
+			border-radius: 5px;
+		}
+		.well {
+			background-color: rgba(127, 127, 127, 0.8);
+			border-radius: 10px;
+		}
+		body{
+		margin: 0;
+		background: url("bg.jpg");
+		background-size: 1920px 1080px;
+		background-repeat:no-repeatdisplay: compact;
+		}
+
+	</style>
+
+</head>
+<body>
+    <div class="row" style="margin: 40px 40px;">
+        <div class="col-12">
+
+            <div id="intro" class="jumbotron">
+                <h1>Andrews Hall Grand Orrery</h1>
+            </div>
+
+            <div class="well">
+			<h3>Lighting Control</h3>
+				<div class="text-center" id=myContainer>
+						<div id=colorpicker></div>
+				</div>
+			</div>
+</body>
+</html>
